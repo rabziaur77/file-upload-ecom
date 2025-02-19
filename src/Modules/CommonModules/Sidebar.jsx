@@ -12,7 +12,7 @@ const Sidebar = () => {
       <div className="pt-2">
         <div>
           <Link to={"/"}>
-          <img src='http://www.accurateappsolution.com/assets/img/logo.png' />
+          <img src='/public/logo.png' />
           </Link>
         </div>
         <Nav className="flex-column">
