@@ -12,7 +12,7 @@ const Sidebar = () => {
       <div className="pt-2">
         <div>
           <Link to={"/"}>
-          <img src='/public/logo.png' />
+          <img src='logo.png' />
           </Link>
         </div>
         <Nav className="flex-column">
