@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5048"
-//const BASE_URL="http://nahid007-001-site1.ktempurl.com"
+//const BASE_URL = "http://localhost:5048"
+const BASE_URL="http://13.61.148.96"
 
 const APIService = {
     GetService: async (endpoint) => {
