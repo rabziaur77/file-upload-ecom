@@ -6,20 +6,35 @@ import ModelList from "./Modules/Models/ModelList";
 import CoverContent from "./Modules/Covers/AddNewCovert";
 import CoverList from "./Modules/Covers/CoverList";
 import CsvByModel from "./Modules/Models/csv-by-model";
+import CheckAuth from "./Modules/Service/AuthRegister";
+import Anonymous from "./Modules/CommonModules/anonymous_layout";
+import AccountLogin from "./Modules/Accont/Login/account-login";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<MainContent />} />
-          <Route path="/model-list" element={<ModelList />} />
-          <Route path="/add-cover" element={<CoverContent />} />
-          <Route path="/cover-list" element={<CoverList />} />
-          <Route path="/csv-by-model" element={<CsvByModel />} />
-        </Routes>
-      </Layout>
-    </BrowserRouter>
+    <>
+      {!CheckAuth() ? (
+        <BrowserRouter>
+          <Anonymous>
+            <Routes>
+              <Route path="/" element={<AccountLogin />} />
+            </Routes>
+          </Anonymous>
+        </BrowserRouter>
+      ) : (
+        <BrowserRouter>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<MainContent />} />
+              <Route path="/model-list" element={<ModelList />} />
+              <Route path="/add-cover" element={<CoverContent />} />
+              <Route path="/cover-list" element={<CoverList />} />
+              <Route path="/csv-by-model" element={<CsvByModel />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      )}
+    </>
   );
 };
 

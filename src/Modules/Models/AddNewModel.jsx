@@ -1,32 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import MobileModelLogic from "./AddNewModelLogic";
 
 const MainContent = () => {
-    const [formData, setFormData] = useState({
-        modelName: "",
-        skuModelName: "",
-        boxNo: "",
-        softwareVersion: "",
-        selectStyle: "Plain",
-        selectSize: "Small",
-        watermarks: [],
-    });
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-    const handleFileChange = (e, index) => {
-        const files = [...formData.watermarks];
-        files[index] = e.target.files[0];
-        setFormData({ ...formData, watermarks: files });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("Form Data:", formData);
-    };
+    
+    const{formData,handleChange,handleFileChange,handleSubmit} = MobileModelLogic()
 
     return (
         <div>
@@ -118,6 +96,7 @@ const MainContent = () => {
                                     <Form.Label>Watermark {index + 1}</Form.Label>
                                     <Form.Control
                                         type="file"
+                                        id={`Watermark${index + 1}`}
                                         onChange={(e) => handleFileChange(e, index)}
                                     />
                                 </Form.Group>
