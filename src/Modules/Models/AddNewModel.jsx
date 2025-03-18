@@ -2,13 +2,13 @@ import React from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import MobileModelLogic from "./AddNewModelLogic";
 
-const MainContent = () => {
-    
-    const{formData,handleChange,handleFileChange,handleSubmit} = MobileModelLogic()
+const MainContent = ({ initialData }) => {
+
+    const { formData, handleChange, handleFileChange, handleSubmit } = MobileModelLogic(initialData)
 
     return (
         <div>
-            <h1 className="h2 border-bottom pb-2">Add New Model</h1>
+            <h1 className="h2 border-bottom pb-2">{initialData != undefined ? "Edit" : "Add New"} Model</h1>
             <Container className="mt-3">
                 <Form onSubmit={handleSubmit}>
                     <Row>
@@ -54,7 +54,6 @@ const MainContent = () => {
                                     placeholder="Enter software version"
                                     value={formData.softwareVersion}
                                     onChange={handleChange}
-                                    required
                                 />
                             </Form.Group>
                             <Form.Group>
@@ -79,14 +78,14 @@ const MainContent = () => {
                                     onChange={handleChange}
                                     required
                                 >
-                                    <option value="">Select Size</option> 
-                                    <option value="M">M</option> 
-                                    <option value="XL">XL</option> 
-                                    <option value="5.3">5.3</option> 
-                                    <option value="5.7">5.7</option> 
-                                    <option value="5.9">5.9</option> 
-                                    <option value="6">6</option> 
-                                    <option value="7">7</option> 
+                                    <option value="">Select Size</option>
+                                    <option value="M">M</option>
+                                    <option value="XL">XL</option>
+                                    <option value="5.3">5.3</option>
+                                    <option value="5.7">5.7</option>
+                                    <option value="5.9">5.9</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
                                 </Form.Control>
                             </Form.Group>
                         </Col>
@@ -103,9 +102,14 @@ const MainContent = () => {
                             ))}
                         </Col>
                     </Row>
-                    <Button type="submit" className="btn btn-custom mt-md-2">
-                        Save
-                    </Button>
+                    {initialData === undefined ?
+                        <Button type="submit" className="btn btn-custom mt-md-2">
+                            Save
+                        </Button> : 
+                        <Button type="submit" className="btn btn-custom mt-md-2">
+                            Update
+                        </Button>}
+
                 </Form>
             </Container>
         </div>

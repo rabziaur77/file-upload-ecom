@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './modelStyle.css'
+import '../Models/modelStyle.css'
 import {
     Container,
     Row,
@@ -10,53 +10,14 @@ import {
     DropdownButton,
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import CsvByModelCoverLogic from "./CsvByModelCoverLogic";
 
-const covers = [
-    "Coff + tan",
-    "TT Brown",
-    "Bk Tower",
-    "Coff Butfly",
-    "Rep3Coff",
-    "Coffee logo",
-    "Black Framee",
-    "TB TAN BLACK",
-    "BLUE SUN",
-    "Black + Blue",
-    "Check",
-    "PINK SUN",
-    "CC TAN BLACK",
-];
-const brandCoverFlip=[
-    "By Brand",
-    "Flip Cover",
-    "Cover"
-]
 const CsvByModel = () => {
-    const [selectedCovers, setSelectedCovers] = useState(new Set());
-    const [selectAll, setSelectAll] = useState(false);
-    const [filters, setFilters] = useState({
-        byBrand: false,
-        flipCover: false,
-        cover: false,
-    });
-
-    const toggleCover = (cover) => {
-        setSelectedCovers((prev) => {
-            const newSelection = new Set(prev);
-            if (newSelection.has(cover)) newSelection.delete(cover);
-            else newSelection.add(cover);
-            return newSelection;
-        });
-    };
-
-    const handleSelectAll = () => {
-        if (selectAll) {
-            setSelectedCovers(new Set());
-        } else {
-            setSelectedCovers(new Set(covers));
-        }
-        setSelectAll(!selectAll);
-    };
+    const { models, covers, brandCoverFlip,
+        handleCoverChange, handleSelectAll,
+        selectAll, selectedCovers, brand,
+        handleChange, elementModel, manufacturer, clickForEcom
+    } = CsvByModelCoverLogic();
 
     return (
         <div>
@@ -66,9 +27,14 @@ const CsvByModel = () => {
                 <Row className="mb-3">
                     <Col>
                         <Form.Group controlId="selectModel">
-                            <Form.Label>Select Model</Form.Label>
-                            <Form.Control as="select">
+                            <Form.Label>Select Model <span className="text-danger">*</span></Form.Label>
+                            <Form.Control as="select" name="selectedModel" onChange={handleChange} required>
                                 <option>Select Model</option>
+                                {
+                                    models.map((model, index) =>
+                                        <option key={index} value={model.modelName}>{model.modelName}</option>
+                                    )
+                                }
                             </Form.Control>
                         </Form.Group>
                     </Col>
@@ -78,29 +44,29 @@ const CsvByModel = () => {
                 <Row className="mb-3">
                     <Col>
                         <label className="cover-label">
-                            Select Covers:
+                            Select Covers <span className="text-danger">*</span>:
                             <input
                                 type="checkbox"
+                                className="custom-checkbox"
                                 checked={selectAll}
                                 onChange={handleSelectAll}
-                                className="custom-checkbox"
                             />
                         </label>
                     </Col>
                 </Row>
 
                 {/* Cover Selection Grid */}
-                <Row>
+                <Row className="selection-cover">
                     {covers.map((cover) => (
-                        <Col key={cover} xs={3} className="mb-2">
+                        <Col key={cover.coverName} xs={3} className="mb-2">
                             <label className="cover-label">
                                 <input
                                     type="checkbox"
-                                    checked={selectedCovers.has(cover)}
-                                    onChange={() => toggleCover(cover)}
                                     className="custom-checkbox"
+                                    checked={selectedCovers[cover.coverName] || false}
+                                    onChange={() => handleCoverChange(cover.coverName)}
                                 />
-                                {cover}
+                                {cover.coverName}
                             </label>
                         </Col>
                     ))}
@@ -110,9 +76,13 @@ const CsvByModel = () => {
                 <Row className="mt-3">
                     <Col>
                         <Form.Group controlId="selectBrand">
-                            <Form.Label>Select Brand Name</Form.Label>
-                            <Form.Control as="select">
+                            <Form.Label>Select Brand Name <span className="text-danger">*</span></Form.Label>
+                            <Form.Control as="select" name="selectBrand" onChange={handleChange}>
                                 <option>Select Brand Name</option>
+                                {
+                                    brand.map((man) =>
+                                        <option key={man} value={man}>{man}</option>)
+                                }
                             </Form.Control>
                         </Form.Group>
                     </Col>
@@ -122,7 +92,7 @@ const CsvByModel = () => {
                 <Row className="mt-3">
                     <Col className="d-flex gap-2">
                         {["Flipkart", "Flipkart XL", "Meesho", "Meesho Excel", "Amazon"].map((platform) => (
-                            <Button key={platform} className="btn btn-custom mt-md-2">
+                            <Button key={platform} className="btn btn-custom mt-md-2" onClick={(e)=>clickForEcom(platform)}>
                                 {platform}
                             </Button>
                         ))}
@@ -130,21 +100,11 @@ const CsvByModel = () => {
                 </Row>
 
                 {/* Manufacturer Dropdown */}
-                <Row className="mt-3">
-                    <Col>
-                        <Form.Group controlId="selectManufacturer">
-                            <Form.Label>Select Manufacturer</Form.Label>
-                            <Form.Control as="select">
-                                <option>Select Manufacturer</option>
-                            </Form.Control>
-                        </Form.Group>
-                    </Col>
-                </Row>
 
                 <Row className="mt-3">
                     <Col className="d-flex gap-2">
                         {brandCoverFlip.map((flp) => (
-                            <label className="cover-label">
+                            <label key={flp} className="cover-label">
                                 <input
                                     type="checkbox"
                                     onChange={() => toggleCover(flp)}
@@ -158,37 +118,42 @@ const CsvByModel = () => {
 
                 <Row className="mt-3">
                     <Col className="d-flex gap-2">
-                            <Form.Control as="select">
-                                <option>Select Manufacturer</option>
-                            </Form.Control>
+                        <Form.Control as="select" name="selectedManufacture" onChange={handleChange}>
+                            <option>Select Manufacturer</option>
+                            {
+                                manufacturer.map((man) =>
+                                    <option key={man} value={man}>{man}</option>)
+                            }
+                        </Form.Control><span className="text-danger">*</span>
                     </Col>
                     <Col className="d-flex gap-2">
-                            <Form.Control
+                        <Form.Control
                             type="text"
                             placeholder="Manufacturer"
-                            >
-                            </Form.Control>
+                            defaultValue={elementModel.selectedManufacture??""}
+                        >
+                        </Form.Control>
                     </Col>
                     <Col className="d-flex gap-2">
-                            <Form.Control
+                        <Form.Control
                             type="text"
                             placeholder="Model From Mesho Model list"
-                            >
-                            </Form.Control>
+                        >
+                        </Form.Control>
                     </Col>
                     <Col className="d-flex gap-2">
-                            <Form.Control
+                        <Form.Control
                             type="text"
                             placeholder="Brand"
-                            >
-                            </Form.Control>
+                        >
+                        </Form.Control>
                     </Col>
                 </Row>
                 <Row className="mt-3">
                     <Col className="d-flex gap-2">
-                    <Form.Control as="textarea" rows="2" className="mb-2" 
-                    placeholder="Additional Description"
-                    />
+                        <Form.Control as="textarea" rows="2" className="mb-2"
+                            placeholder="Additional Description"
+                        />
                     </Col>
                 </Row>
             </Container>

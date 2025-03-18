@@ -5,10 +5,11 @@ import Layout from "./Modules/CommonModules/Layout";
 import ModelList from "./Modules/Models/ModelList";
 import CoverContent from "./Modules/Covers/AddNewCovert";
 import CoverList from "./Modules/Covers/CoverList";
-import CsvByModel from "./Modules/Models/csv-by-model";
 import CheckAuth from "./Modules/Service/AuthRegister";
 import Anonymous from "./Modules/CommonModules/anonymous_layout";
 import AccountLogin from "./Modules/Accont/Login/account-login";
+import CsvByModel from "./Modules/CsvModelCover/CsvByModelCover";
+import FinalConfig from "./Modules/Final/ConfigModelndCover";
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
               <Route path="/add-cover" element={<CoverContent />} />
               <Route path="/cover-list" element={<CoverList />} />
               <Route path="/csv-by-model" element={<CsvByModel />} />
+              <Route path="/final-config" element={<FinalConfig/>} />
             </Routes>
           </Layout>
         </BrowserRouter>

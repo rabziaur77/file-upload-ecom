@@ -36,3 +36,17 @@
     width: fit-content;
   }
   
+  .img-size{
+    width: 30px;
+  }
+  .name-group{
+    background-color: #000000;
+    color: #fff;
+    border-radius: 50%;
+    padding: 5px;
+    margin-right: 5px;
+  }
+  .selection-cover{
+    max-height: 168px;
+    overflow: auto;
+  }

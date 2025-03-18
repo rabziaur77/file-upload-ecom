@@ -1,0 +1,19 @@
+.tbl-data{
+    overflow: auto;
+}
+.img-link{
+    max-width: 200px;
+    font-size: 10px;
+    overflow-wrap: break-word;
+}
+.tbl-data tbody tr td{
+    font-size: 10px;
+    /*min-width: 115px;  Ensures each cell has a minimum width */
+  padding: 10px; /* Adds spacing inside cells */
+  word-break: break-word; /* Prevents text overflow */
+  text-align: left; /* Aligns text properly */
+}
+.tbl-data thead th {
+    font-size: 13px;
+    min-width: 100px;
+}

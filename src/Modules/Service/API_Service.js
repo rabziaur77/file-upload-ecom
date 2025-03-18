@@ -1,7 +1,7 @@
 import axios from "axios";
 
-//const BASE_URL = "http://localhost:5048"
-const BASE_URL="http://13.61.148.96"
+//export const BASE_URL = "http://localhost:5048"
+export const BASE_URL="http://13.61.148.96/mobilapi"
 
 const APIService = {
     GetService: async (endpoint) => {
@@ -24,6 +24,13 @@ const APIService = {
         let Session = getToken();
         const AuthStr = Session !== null && Session !== undefined ? 'Bearer '.concat(Session) : "";
         const response = await axios.post(BASE_URL + endpoint, data, { headers: { 'Authorization': AuthStr, 'Content-Type': 'multipart/form-data' } }).catch(err => err);
+        if (response.status != 200) {
+            return response.message
+        }
+        return response.data;
+    },
+    deleteModel: async (endpoint) => {
+        const response = await axios.delete(BASE_URL + endpoint);
         if (response.status != 200) {
             return response.message
         }
