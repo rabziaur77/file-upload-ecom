@@ -16,7 +16,7 @@ const CsvByModel = () => {
     const { models, covers, brandCoverFlip,
         handleCoverChange, handleSelectAll,
         selectAll, selectedCovers, brand,
-        handleChange, elementModel, manufacturer, clickForEcom
+        handleChange, elementModel, manufacturer, clickForEcom, btnList
     } = CsvByModelCoverLogic();
 
     return (
@@ -91,7 +91,7 @@ const CsvByModel = () => {
                 {/* Platform Buttons */}
                 <Row className="mt-3">
                     <Col className="d-flex gap-2">
-                        {["Flipkart", "Flipkart XL", "Meesho", "Meesho Excel", "Amazon"].map((platform) => (
+                        {btnList.map((platform) => (
                             <Button key={platform} className="btn btn-custom mt-md-2" onClick={(e)=>clickForEcom(platform)}>
                                 {platform}
                             </Button>

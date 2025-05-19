@@ -22,6 +22,7 @@ function CsvByModelCoverLogic(){
     const [selectedCovers, setSelectedCovers] = useState(new Set());
     const [selectAll, setSelectAll] = useState(false);
     const[elementModel, setElementModel] = useState({selectedModel:"", selectBrand:'', selectedManufacture:''})
+    const btnList = ["Flipkart", "Flipkart XL", "Meesho Excel"];
 
     useEffect(()=>{
         fetchModels();
@@ -97,12 +98,18 @@ function CsvByModelCoverLogic(){
     const clickForEcom=(ecom)=>{
         switch(ecom){
             case "Flipkart":
-                flipKart();
+                redirectEcom("Flipkart");
+                break;
+            case "Flipkart XL":
+                redirectEcom("FlipkartXL");
+                break;
+            case "Meesho Excel":
+                redirectEcom("MeeshoExcel");
                 break;
         }
     }
 
-    const flipKart=()=>{
+    const redirectEcom=(callEcom)=>{
         if(elementModel.selectedModel==="" || elementModel.selectBrand==="" || Object.keys(selectedCovers)<=0 || elementModel.selectedManufacture ===""){
             alert("Please select mandatory point")
             return
@@ -116,12 +123,12 @@ function CsvByModelCoverLogic(){
         }
 
         const masterModel={
+            selectedEcom: callEcom,
             selectedModel: models.find(model=> model.modelName === elementModel.selectedModel),
             selectedBrand: elementModel.selectBrand,
             selectedManufacturer: elementModel.selectedManufacture,
             selectedCovers: covers.filter(cover=> lstCovers.includes(cover.coverName))
         }
-
 
         navigate("/final-config", {state: masterModel})
     }
@@ -138,7 +145,8 @@ function CsvByModelCoverLogic(){
         elementModel,
         handleChange,
         manufacturer,
-        clickForEcom
+        clickForEcom,
+        btnList
     }
 }
 
