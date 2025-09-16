@@ -84,7 +84,9 @@ const CoverContent = ({ initialData }) => {
                 </Col>
                 <Col>
                   {["MRP", "Tax Rate", "Weight Flipkart In Kg", "Weight Meesho In Grams", "QTY",
-                    "Sales QTY", "Country Of Origin", "Type", "X1", "X2", "X3", "X4", "X5", "X6", "X7"
+                    "Sales QTY", "Country Of Origin", "Type", "X1", "X2", "X3", "X4", "X5", "X6", "X7",
+                    "X8", "X9", "X10", "X11", "X12", "X13", "X14", "X15", "X16", "X17", 
+                    "X18", "X19", "X20", "X21", "X22", "X23", "X24", "X25"
                   ].map((label) => (
                     <Form.Group key={label}>
                       <Form.Label>{label}:</Form.Label>

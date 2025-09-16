@@ -47,6 +47,24 @@ function CoverContentLogic(initialData = null) {
     x5: null,
     x6: null,
     x7: null,
+    x8: null,
+    x9: null,
+    x10: null,
+    x11: null,
+    x12: null,
+    x13: null,
+    x14: null,
+    x15: null,
+    x16: null,
+    x17: null,
+    x18: null,
+    x19: null,
+    x20: null,
+    x21: null,
+    x22: null,
+    x23: null,
+    x24: null,
+    x25: null,
     description: "",
     keywords: "",
     features1: "",
@@ -92,50 +110,57 @@ function CoverContentLogic(initialData = null) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    dispatch(showPopup("Please, Wait..."))
+    dispatch(showPopup("Please, Wait..."));
 
     console.log("Submitting form data...", formData);
 
     try {
       const formDataToSend = new FormData();
       for (const key in formData) {
-        if(!key.includes("cover")){
-          let val = (formData[key] === "" || formData[key] === null) ? null : formData[key];
+        if (!key.includes("cover")) {
+          let val =
+            formData[key] === "" || formData[key] === null
+              ? null
+              : formData[key];
           formDataToSend.append(key, val);
-        }
-        else if(key==="coverName"){
-          let val = (formData[key] === "" || formData[key] === null) ? null : formData[key];
+        } else if (key === "coverName") {
+          let val =
+            formData[key] === "" || formData[key] === null
+              ? null
+              : formData[key];
           formDataToSend.append(key, val);
         }
       }
 
       for (let i = 1; i <= 6; i++) {
-
         const fileInput = document.getElementById(`cover${i}`);
         if (fileInput?.files?.[0]) {
-          formDataToSend.append('covers', fileInput.files[0]);
+          formDataToSend.append("covers", fileInput.files[0]);
           formDataToSend.append(`coverIds`, i);
         }
       }
 
       if (initialData !== null) {
-        formDataToSend.append('Id', initialData.id);
+        formDataToSend.append("Id", initialData.id);
       }
       // Call API to submit form data
-      const response = await APIService.PostFormService("/api/MobileCovers/AddCover", formDataToSend);
+      const response = await APIService.PostFormService(
+        "/api/MobileCovers/AddCover",
+        formDataToSend
+      );
 
       let message = response.message != undefined ? response.message : response;
 
-      dispatch(showPopup(message))
+      dispatch(showPopup(message));
       setTimeout(() => {
-        dispatch(hidePopup())
-      }, 1000)
+        dispatch(hidePopup());
+      }, 1000);
     } catch (error) {
       console.error("Submission failed:", error);
       dispatch(showPopup("Something went wrong, please contact to support."));
       setTimeout(() => {
-        dispatch(hidePopup())
-      }, 1000)
+        dispatch(hidePopup());
+      }, 1000);
     }
   };
 

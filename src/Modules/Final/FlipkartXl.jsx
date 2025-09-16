@@ -9,19 +9,31 @@ function FlipKartXl({ mergedData }) {
             <thead>
                 <tr>
                     <th>Seller SKU ID</th>
+                    <th>Blank</th>
                     <th>X2</th>
                     <th>MRP</th>
                     <th>Flipkart Price</th>
-                    <th>X3</th>
-                    <th>Product Price</th>
+                    <th>X8</th>
+                    <th>X9</th>
+                    {/* <th>Product Price</th> */}
                     <th>Sales QTY</th>
                     <th>QTY	</th>
-                    <th>Product Stock</th>
+                    <th>X10</th>
+                    <th>X5</th>
+                    <th>X6</th>
+                    <th>X7</th>
+                    <th>Length</th>
+                    <th>Width</th>
+                    <th>Height</th>
+                    <th>Weight</th>
                     <th>HSN</th>
+                    <th>Blank</th>
                     <th>Countery of origin</th>
                     <th>Manufacturer Details</th>
                     <th>Manufacturer Details</th>
+                    <th>Blank</th>
                     <th>Tax</th>
+                    <th>Blank</th>
                     <th>Z</th>
                     <th>AA</th>
                     <th>AB</th>
@@ -53,19 +65,31 @@ function FlipKartXl({ mergedData }) {
                     return (
                         <tr key={index}>
                             <td>{item.sellerSkuId || "N/A"}</td>
+                            <td></td>
                             <td>{item.x2 || "N/A"}</td>
                             <td>{item.mrp || "N/A"}</td>
                             <td>{item.flipkartPrice || "N/A"}</td>
-                            <td>{item.x3 || "N/A"}</td>
-                            <td>{item.productPrice || "N/A"}</td>
+                            <td>{item.x8 || ""}</td>
+                            <td>{item.x9 || ""}</td>
+                            {/* <td>{item.productPrice || "N/A"}</td> */}
                             <td>{item.salesQty || "N/A"}</td>
                             <td>{item.qty || "N/A"}</td>
-                            <td>{item.productStock || "N/A"}</td>
+                            <td>{item.x10 || ""}</td>
+                            <td>{item.x5 || ""}</td>
+                            <td>{item.x6 || ""}</td>
+                            <td>{item.x7 || ""}</td>
+                            <td>{item.length || ""}</td>
+                            <td>{item.width || ""}</td>
+                            <td>{item.height || ""}</td>
+                            <td>{item.weight || ""}</td>
                             <td>{item.hsn || "N/A"}</td>
+                            <td></td>
                             <td>{item.countryOfOrigin || "N/A"}</td>
                             <td>{item.manufacturerDetails || "N/A"}</td>
                             <td>{item.manufacturerDetails || "N/A"}</td>
-                            <td>{item.tax || "N/A"}</td>
+                            <td></td>
+                            <td>GST_{item.tax || "N/A"}</td>
+                            <td></td>
                             <td>{item.z || "N/A"}</td>
                             <td>{item.aa || "N/A"}</td>
                             <td>{item.ab || "N/A"}</td>
@@ -97,9 +121,9 @@ function FlipKartXl({ mergedData }) {
                                 {item.an && <img src={getImageUrl(item.an)} alt="Main" width="100" />}
                             </td>
                             <td>{item.ao || "N/A"}</td>
-                            <td>{item.ap || "N/A"}</td>
-                            <td>{item.aq || "N/A"}</td>
-                            <td>{item.ar || "N/A"}</td>
+                            <td>{item.ap || ""}</td>
+                            <td>{item.aq || ""}</td>
+                            <td>{item.ar || ""}</td>
                             <td>{item.as || "N/A"}</td>
                             <td>{item.at || "N/A"}</td>
                             <td>{item.au || "N/A"}</td>

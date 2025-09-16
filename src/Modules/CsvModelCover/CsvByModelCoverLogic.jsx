@@ -10,10 +10,14 @@ const brandCoverFlip=[
 ]
 
 const brand=[
-    "MYSHANZ"
+    "MYSHANZ",
+    "Maxshopy",
+    "MAXSHAD"
 ]
 const manufacturer=[
-    "MYSHA ENTERPRISES"
+    "MYSHA ENTERPRISES",
+    "M A ENTERPRISES",
+    "MAX SHOPY"
 ]
 function CsvByModelCoverLogic(){
     const navigate = useNavigate();
