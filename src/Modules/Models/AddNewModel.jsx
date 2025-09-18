@@ -88,6 +88,39 @@ const MainContent = ({ initialData }) => {
                                     <option value="7">7</option>
                                 </Form.Control>
                             </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Company Name</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="companyName"
+                                    placeholder="Enter company name"
+                                    value={formData.companyName}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Address</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="address"
+                                    placeholder="Enter address"
+                                    value={formData.address}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </Form.Group>
+                            <Form.Group>
+                                <Form.Label>Pincode</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="pincode"
+                                    placeholder="Enter pincode"
+                                    value={formData.pincode}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </Form.Group>
                         </Col>
                         <Col md={6}>
                             {[...Array(6)].map((_, index) => (

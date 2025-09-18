@@ -12,6 +12,9 @@ function MobileModelLogic(initialData = null) {
         softwareVersion: "",
         selectStyle: "Plain",
         selectSize: "Small",
+        companyName: "",
+        address: "",
+        pincode: "",
         watermarks: [],
     });
 
@@ -24,6 +27,9 @@ function MobileModelLogic(initialData = null) {
                 softwareVersion: initialData.softwareVersion || "",
                 selectStyle: initialData.plainOrCurve || "Plain",
                 selectSize: initialData.size || "Small",
+                companyName: initialData.companyName || "",
+                address: initialData.address || "",
+                pincode: initialData.pincode || "",
                 watermarks: [
                     initialData.watermark1,
                     initialData.watermark2,
@@ -79,6 +85,9 @@ function MobileModelLogic(initialData = null) {
         requestData.append('SoftwareVersion', formData.softwareVersion);
         requestData.append('PlainOrCurve', formData.selectStyle);
         requestData.append('Size', formData.selectSize);
+        requestData.append('CompanyName', formData.companyName);
+        requestData.append('Address', formData.address);
+        requestData.append('Pincode', formData.pincode);
 
         // Append MobileModelRequest properties
         if (initialData === null) {
