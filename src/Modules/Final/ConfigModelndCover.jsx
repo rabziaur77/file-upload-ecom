@@ -4,6 +4,7 @@ import APIService, { BASE_URL } from "../Service/API_Service";
 import FlipKart from "./Flipkart";
 import FlipKartXl from "./FlipkartXl";
 import MeeshoXL from "./MeeshoXL";
+import ShopsyXl from "./Shopsy";
 
 const FinalConfig = () => {
     const location = useLocation();
@@ -18,9 +19,15 @@ const FinalConfig = () => {
 
     const mergeImages = async () => {
         setLoading('Please Wait...')
-        let apiURL = location.state.selectedEcom === "Flipkart" ? "/api/FinalConfig/getMergedInformation" :
-            location.state.selectedEcom === "FlipkartXL" ? "/api/FinalConfig/getMergedInformationFlipkartXl" :
-                location.state.selectedEcom === "MeeshoExcel" ? "/api/FinalConfig/getMergedInformationMeeshoExcel" : "";
+
+        const apiMap = {
+            Flipkart: "/api/FinalConfig/getMergedInformation",
+            FlipkartXL: "/api/FinalConfig/getMergedInformationFlipkartXl",
+            MeeshoExcel: "/api/FinalConfig/getMergedInformationMeeshoExcel",
+            ShopsyXL: "/api/FinalConfig/getMergedInformationShopsyExcel"
+        };
+
+        const apiURL = apiMap[location.state?.selectedEcom] || "";
 
         await APIService.PostService(apiURL, location.state)
             .then(response => {
@@ -33,44 +40,11 @@ const FinalConfig = () => {
 
         setLoading('Completed.')
     };
-
-    // const getDataClipboard = () => {
-    //     const headers = Object.keys(mergedData[0]);
-    //     const tsvRows = [];
-    
-    //     // Add headers (tab-separated)
-    //     tsvRows.push(headers.join('\t'));
-    
-    //     // Add each row
-    //     for (const row of mergedData) {
-    //         const values = headers.map(header => {
-    //             const val = row[header] !== null ? row[header] : '';
-    //             return String(val).replace(/\t/g, ' '); // avoid tab chars inside values
-    //         });
-    //         tsvRows.push(values.join('\t'));
-    //     }
-    
-    //     const tsv = tsvRows.join('\r\n'); // Use CRLF for Excel compatibility
-    
-    //     // Use textarea trick for consistent clipboard behavior
-    //     const textarea = document.createElement('textarea');
-    //     textarea.value = tsv;
-    //     document.body.appendChild(textarea);
-    //     textarea.select();
-    //     try {
-    //         document.execCommand('copy');
-    //         alert('Copied data (TSV) to clipboard! Paste into Excel.');
-    //     } catch (err) {
-    //         alert('Copy failed: ' + err);
-    //     }
-    //     document.body.removeChild(textarea);
-    // };
-
     const getDataClipboard = () => {
         const table = document.querySelector('.table-striped');
         if (!table) return alert('Table not found!');
     
-        const rows = Array.from(table.querySelectorAll('tr'));
+        const rows = Array.from(table.querySelectorAll('tbody tr'));
         const tsvData = rows.map(row => {
             const cells = Array.from(row.querySelectorAll('td'));
             return cells.map(cell =>
@@ -96,8 +70,14 @@ const FinalConfig = () => {
         document.body.removeChild(textarea);
     };
     
+    const componentMap = {
+        Flipkart: FlipKart,
+        FlipkartXL: FlipKartXl,
+        MeeshoExcel: MeeshoXL,
+        ShopsyXL: ShopsyXl
+    };
       
-
+    const SelectedComponent = componentMap[location.state?.selectedEcom] || null;
     return (
         <>
             <div className="tbl-data">
@@ -113,15 +93,7 @@ const FinalConfig = () => {
                     }
                 </div>
                 {
-                    mergedData.length > 0 ?
-                        location.state.selectedEcom === "Flipkart" ?
-                            <FlipKart mergedData={mergedData} />
-                            : location.state.selectedEcom === "FlipkartXL" ?
-                                <FlipKartXl mergedData={mergedData} />
-                                : location.state.selectedEcom === "MeeshoExcel" ?
-                                    <MeeshoXL mergedData={mergedData} />
-                                    : null
-                        : null
+                    SelectedComponent && <SelectedComponent mergedData={mergedData} />
                 }
             </div>
         </>

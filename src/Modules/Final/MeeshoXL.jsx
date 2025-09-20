@@ -29,7 +29,7 @@ function MeeshoXL({ mergedData }) {
                     {/* <th>Manufacurar</th> */}
                     <th>E</th>
                     {/* <th>Packer</th> */}
-                    <th>X13</th>
+                    <th>Meesho Compatible</th>
                     <th>X14</th>
                     <th>X15</th>
                     <th>Sales QTY</th> 
@@ -84,7 +84,7 @@ function MeeshoXL({ mergedData }) {
                                 {/* <td>{item.manufacturer || "N/A"}</td> */}
                                 {/* <td>{item.packer || "N/A"}</td> */}
                                 <td>{item.e || "N/A"}</td>
-                                <td>{item.x13 || ""}</td>
+                                <td>{item.meeshoCompatible || ""}</td>
                                 <td>{item.x14 || ""}</td>
                                 <td>{item.x15 || ""}</td>
                                 <td>{item.salesQuantity || "N/A"}</td>

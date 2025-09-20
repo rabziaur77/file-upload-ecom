@@ -25,8 +25,10 @@ function CsvByModelCoverLogic(){
     const[covers, setCover]=useState([]);
     const [selectedCovers, setSelectedCovers] = useState(new Set());
     const [selectAll, setSelectAll] = useState(false);
-    const[elementModel, setElementModel] = useState({selectedModel:"", selectBrand:'', selectedManufacture:''})
-    const btnList = ["Flipkart", "Flipkart XL", "Meesho Excel"];
+    const[elementModel, setElementModel] = useState(
+        {selectedModel:"", selectBrand:'', selectedManufacture:'', company:'', address:'', pincode:''}
+    );
+    const btnList = ["Flipkart", "Flipkart XL", "Meesho Excel", "Shopsy XL"];
 
     useEffect(()=>{
         fetchModels();
@@ -100,16 +102,14 @@ function CsvByModelCoverLogic(){
     };
 
     const clickForEcom=(ecom)=>{
-        switch(ecom){
-            case "Flipkart":
-                redirectEcom("Flipkart");
-                break;
-            case "Flipkart XL":
-                redirectEcom("FlipkartXL");
-                break;
-            case "Meesho Excel":
-                redirectEcom("MeeshoExcel");
-                break;
+        const ecomMap = {
+            "Flipkart": "Flipkart",
+            "Flipkart XL": "FlipkartXL",
+            "Meesho Excel": "MeeshoExcel",
+            "Shopsy XL": "ShopsyXL",
+        };
+        if (ecomMap[ecom]) {
+            redirectEcom(ecomMap[ecom]);
         }
     }
 
@@ -131,7 +131,10 @@ function CsvByModelCoverLogic(){
             selectedModel: models.find(model=> model.modelName === elementModel.selectedModel),
             selectedBrand: elementModel.selectBrand,
             selectedManufacturer: elementModel.selectedManufacture,
-            selectedCovers: covers.filter(cover=> lstCovers.includes(cover.coverName))
+            selectedCovers: covers.filter(cover=> lstCovers.includes(cover.coverName)),
+            company: elementModel.company,
+            address: elementModel.address,
+            pincode: elementModel.pincode
         }
 
         navigate("/final-config", {state: masterModel})

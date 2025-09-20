@@ -151,6 +151,38 @@ const CsvByModel = () => {
                 </Row>
                 <Row className="mt-3">
                     <Col className="d-flex gap-2">
+                        <Form.Control
+                            type="text"
+                            name="company"
+                            placeholder="For Mesho Company"
+                            value={elementModel.company}
+                            onChange={handleChange}
+                        >
+                        </Form.Control>
+                    </Col>
+                    <Col className="d-flex gap-2">
+                        <Form.Control
+                            name="address"
+                            type="text"
+                            placeholder="For Mesho Address"
+                            value={elementModel.address}
+                            onChange={handleChange}
+                        >
+                        </Form.Control>
+                    </Col>
+                    <Col className="d-flex gap-2">
+                        <Form.Control
+                            name="pincode"
+                            type="text"
+                            placeholder="For Mesho Pincode"
+                            value={elementModel.pincode}
+                            onChange={handleChange}
+                        >
+                        </Form.Control>
+                    </Col>
+                </Row>
+                <Row className="mt-3">
+                    <Col className="d-flex gap-2">
                         <Form.Control as="textarea" rows="2" className="mb-2"
                             placeholder="Additional Description"
                         />
