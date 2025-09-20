@@ -52,6 +52,7 @@ function MeeshoXL({ mergedData }) {
                     {/* <th>Brand</th>
                     <th>Group id</th> */}
                     <th>U + Model Name in Place Of Flip Cover</th>
+                    <th>Blank</th>
                     <th>X18</th>
                     <th>X19</th>
                 </tr>
@@ -62,7 +63,7 @@ function MeeshoXL({ mergedData }) {
                         const getImageUrl = (url) => (url?.startsWith("https") ? url : url !== null ? BASE_URL + url : "");
                         return (
                             <tr key={index}>
-                                <td>{item.designFor || "N/A"}</td>
+                                <td>{item.designFor || "N/A"} {item.ab || "N/A"} {item.designFor || "N/A"} {item.ab || "N/A"}</td>
                                 <td>{item.x11 || ""}</td>
                                 <td>{item.meeshoPrice || "N/A"}</td>
                                 <td>{item.x12 || ""}</td>
@@ -118,8 +119,9 @@ function MeeshoXL({ mergedData }) {
                                 {/* <td>{item.aPlusZY || "N/A"}</td>
                                 <td>{item.aPlusZH || "N/A"}</td>
                                 <td>{item.brand || "N/A"}</td> */}
-                                <td>{item.modelID || ""}{item.groupName || ""}</td>
+                                <td>{item.x20 || ""}{item.modelID || ""}{item.groupName || ""}</td>
                                 <td style={{ minWidth: 500 }}>{item.uModelName || "N/A"}</td>
+                                <td></td>
                                 <td>{item.x18 || ""}</td>
                                 <td>{item.x19 || ""}</td>
                             </tr>

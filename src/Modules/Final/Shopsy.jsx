@@ -105,7 +105,7 @@ function ShopsyXl({ mergedData }) {
                             <td>{item.aa || "N/A"}</td>
                             <td>{item.ah || "N/A"}</td>
                             <td>{item.companyName || "N/A"}</td>
-                            <td>{item.ddress || "N/A"}</td>
+                            <td>{item.address || "N/A"}</td>
                             <td>
                                 <div className="img-link">{getImageUrl(item.aj)}</div>
                                 {item.aj && <img src={getImageUrl(item.aj)} alt="Main" width="100" />}

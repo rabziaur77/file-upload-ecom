@@ -89,7 +89,7 @@ const MainContent = ({ initialData }) => {
                                 </Form.Control>
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Company Name</Form.Label>
+                                <Form.Label>Shopsy Designed For Brand</Form.Label>
                                 <Form.Control
                                     type="text"
                                     name="companyName"
@@ -100,7 +100,7 @@ const MainContent = ({ initialData }) => {
                                 />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Address</Form.Label>
+                                <Form.Label>Shopsy Designed For Model</Form.Label>
                                 <Form.Control
                                     type="text"
                                     name="address"
@@ -111,7 +111,7 @@ const MainContent = ({ initialData }) => {
                                 />
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Pincode</Form.Label>
+                                <Form.Label>Meesho Compatible Model</Form.Label>
                                 <Form.Control
                                     type="text"
                                     name="pincode"
