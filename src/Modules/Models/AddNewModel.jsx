@@ -96,7 +96,6 @@ const MainContent = ({ initialData }) => {
                                     placeholder="Enter company name"
                                     value={formData.companyName}
                                     onChange={handleChange}
-                                    required
                                 />
                             </Form.Group>
                             <Form.Group>
@@ -107,7 +106,6 @@ const MainContent = ({ initialData }) => {
                                     placeholder="Enter address"
                                     value={formData.address}
                                     onChange={handleChange}
-                                    required
                                 />
                             </Form.Group>
                             <Form.Group>
@@ -118,7 +116,6 @@ const MainContent = ({ initialData }) => {
                                     placeholder="Enter pincode"
                                     value={formData.pincode}
                                     onChange={handleChange}
-                                    required
                                 />
                             </Form.Group>
                         </Col>

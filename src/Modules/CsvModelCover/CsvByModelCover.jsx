@@ -101,7 +101,7 @@ const CsvByModel = () => {
 
                 {/* Manufacturer Dropdown */}
 
-                <Row className="mt-3">
+                <Row className="mt-3" style={{ display: 'none' }}>
                     <Col className="d-flex gap-2">
                         {brandCoverFlip.map((flp) => (
                             <label key={flp} className="cover-label">
@@ -183,7 +183,7 @@ const CsvByModel = () => {
                 </Row>
                 <Row className="mt-3">
                     <Col className="d-flex gap-2">
-                        <Form.Control as="textarea" rows="2" className="mb-2"
+                        <Form.Control as="textarea" rows="2" className="mb-2" style={{ display: 'none' }}
                             placeholder="Additional Description"
                         />
                     </Col>

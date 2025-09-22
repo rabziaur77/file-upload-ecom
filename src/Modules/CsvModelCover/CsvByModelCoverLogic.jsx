@@ -11,13 +11,13 @@ const brandCoverFlip=[
 
 const brand=[
     "MYSHANZ",
-    "Maxshopy",
+    "MAXSHOPY",
     "MAXSHAD"
 ]
 const manufacturer=[
     "MYSHA ENTERPRISES",
     "M A ENTERPRISES",
-    "MAX SHOPY"
+    "MAX SHOPY DELHI"
 ]
 function CsvByModelCoverLogic(){
     const navigate = useNavigate();
@@ -84,6 +84,10 @@ function CsvByModelCoverLogic(){
         const{name,value}=e.target;
 
         setElementModel((prev)=>({...prev, [name]:value}))
+
+
+        if(name === "selectedManufacture")
+            setElementModel((prev)=>({...prev, company:value}))
     }
 
     const handleSelectAll = () => {

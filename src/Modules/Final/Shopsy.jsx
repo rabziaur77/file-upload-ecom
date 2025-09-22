@@ -11,7 +11,7 @@ function ShopsyXl({ mergedData }) {
                     <th>Blank</th>
                     <th>X2</th>
                     <th>MRP</th>
-                    <th>Flipkart Price</th>
+                    <th>Shopsy Price</th>
                     <th>X8</th>
                     <th>X9</th>
                     {/* <th>Product Price</th> */}
@@ -67,7 +67,7 @@ function ShopsyXl({ mergedData }) {
 
                     return (
                         <tr key={index}>
-                            <td>{item.sellerSkuId || "N/A"}</td>
+                            <td>{item.sellerSkuId || "N/A"} SHOPSY</td>
                             <td></td>
                             <td>{item.x2 || "N/A"}</td>
                             <td>{item.mrp || "N/A"}</td>
@@ -100,7 +100,7 @@ function ShopsyXl({ mergedData }) {
                             <td>{item.ai || "N/A"}</td>
                             <td>{item.af || "N/A"}</td>
                             <td>{item.x23 || "N/A"}</td>
-                            <td>{item.ad || "N/A"}</td>
+                            <td>{item.ad || "N/A"}  ({item.softwareVersion || "N/A"})</td>
                             <td>{item.ae || "N/A"}</td>
                             <td>{item.aa || "N/A"}</td>
                             <td>{item.ah || "N/A"}</td>

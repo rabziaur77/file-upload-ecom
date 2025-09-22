@@ -63,14 +63,14 @@ function MeeshoXL({ mergedData }) {
                         const getImageUrl = (url) => (url?.startsWith("https") ? url : url !== null ? BASE_URL + url : "");
                         return (
                             <tr key={index}>
-                                <td>{item.designFor || "N/A"} {item.ab || "N/A"} {item.designFor || "N/A"} {item.ab || "N/A"}</td>
+                                <td>{item.designFor || "N/A"} ({item.softwareVersion || "N/A"}) {item.ab || "N/A"} {item.designFor || "N/A"} {item.x24 || "N/A"}</td>
                                 <td>{item.x11 || ""}</td>
                                 <td>{item.meeshoPrice || "N/A"}</td>
                                 <td>{item.x12 || ""}</td>
                                 <td>{item.mrp || "N/A"}</td>
                                 <td>{item.taxRate || "N/A"}</td>
                                 <td>{item.hsn || "N/A"}</td>
-                                <td>{item.weight || "N/A"}</td>
+                                <td>{item.weightMeeshoInGrams || "N/A"}</td>
                                 <td>{item.quantity || "N/A"}</td>
                                 <td>{item.countryOfOrigin || "N/A"}</td>
                                 <td>{item.companyName || "N/A"}</td>
