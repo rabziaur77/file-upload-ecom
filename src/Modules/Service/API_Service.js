@@ -35,6 +35,15 @@ const APIService = {
             return response.message
         }
         return response.data;
+    },
+    PatchService: async (endpoint, data) => {
+        let Session = getToken();
+        const AuthStr = Session !== null && Session !== undefined ? 'Bearer '.concat(Session) : "";
+        const response = await axios.patch(BASE_URL + endpoint, data, { headers: { Authorization: AuthStr } }).catch(err => err);
+        if (response.status != 200) {
+            return response.message
+        }
+        return response.data;
     }
 }
 
