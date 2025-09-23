@@ -42,7 +42,8 @@ function CsvByModelCoverLogic(){
             
             // Check the structure of the response
             if (response && response.response) {
-                setModels(response.response);
+               const modelMap = response.response.filter(model => model.isActive);
+               setModels(modelMap);
             } else {
                 console.warn("Unexpected response structure:", response);
             }
@@ -58,7 +59,8 @@ function CsvByModelCoverLogic(){
             
             // Check the structure of the response
             if (response && response.response) {
-                setCover(response.response);
+                const coverMap = response.response.filter(cover => cover.isActive);
+                setCover(coverMap);
             } else {
                 console.warn("Unexpected response structure:", response);
             }

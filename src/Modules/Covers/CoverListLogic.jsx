@@ -48,13 +48,24 @@ function CoverListLogic(){
             console.warn("Unexpected response structure:", response);
         }
     }
+
+    const handleToggleActive= async(id, isActive)=>{
+        const response = await APIService.PatchService(`/api/MobileCovers/updateIsActive/${id}`,{ isActive: !isActive })
+        if (response) {
+            alert(response.message);
+            fetchCovers();
+        } else {
+            console.warn("Unexpected response structure:", response);
+        }
+    }
     return {
         covers,
         handleEdit,
         handleDel,
         showCover,
         handleClose,
-        selecteCover
+        selecteCover,
+        handleToggleActive
     }
 }
 

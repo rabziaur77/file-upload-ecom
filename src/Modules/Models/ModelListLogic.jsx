@@ -48,13 +48,23 @@ function ModelListLogic(){
             console.warn("Unexpected response structure:", response);
         }
     }
+    const handleToggleActive= async(id, isActive)=>{
+        const response = await APIService.PatchService(`/api/MobileModels/updateIsActive/${id}`,{ isActive: !isActive })
+        if (response) {
+            alert(response.message);
+            fetchModels();
+        } else {
+            console.warn("Unexpected response structure:", response);
+        }
+    }
     return {
         models,
         handleEdit,
         handleDel,
         showModal,
         handleClose,
-        selecteModel
+        selecteModel,
+        handleToggleActive
     }
 }
 

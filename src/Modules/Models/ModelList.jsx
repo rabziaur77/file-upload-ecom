@@ -6,7 +6,7 @@ import './modelStyle.css'
 
 const ModelList = () => {
 
-    const { models, handleEdit, handleDel, showModal, handleClose, selecteModel } = ModelListLogic();
+    const { models, handleEdit, handleDel, showModal, handleClose, selecteModel, handleToggleActive } = ModelListLogic();
 
     return (
         <div>
@@ -24,6 +24,7 @@ const ModelList = () => {
                             <th>w1</th><th>w2</th><th>w3</th><th>w4</th><th>w5</th><th>w6</th>
                             <th>Edit</th>
                             <th>Delete</th>
+                            <th>Active</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,6 +50,7 @@ const ModelList = () => {
                                     <td>{model.watermark6 != null ? <img className="img-size" src={model.watermark6} /> : null}</td>
                                     <td><button className="btn" onClick={() => handleEdit(model)}>&#128221;</button></td>
                                     <td><button className="btn" onClick={() => handleDel(model.modelID)}>&#128465;</button></td>
+                                    <td><input type="checkbox" checked={model.isActive} onChange={() => handleToggleActive(model.modelID, model.isActive)} /></td>
                                 </tr>
                             ))
                         )}

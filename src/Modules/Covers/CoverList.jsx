@@ -6,7 +6,7 @@ import '../Models/modelStyle.css'
 
 const CoverList = () => {
 
-    const{covers,handleClose,handleDel,handleEdit,selecteCover,showCover} = CoverListLogic()
+    const{covers,handleClose,handleDel,handleEdit,selecteCover,showCover,handleToggleActive} = CoverListLogic()
 
     return (
         <div>
@@ -24,6 +24,7 @@ const CoverList = () => {
                             <th>C5-6</th>
                             <th>Edit</th>
                             <th>Delete</th>
+                            <th>Active</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,6 +66,7 @@ const CoverList = () => {
                                     </td>
                                     <td><button className="btn" onClick={() => handleEdit(cover)}>&#128221;</button></td>
                                     <td><button className="btn" onClick={() => handleDel(cover.id)}>&#128465;</button></td>
+                                    <td><input type="checkbox" checked={cover.isActive} onChange={() => handleToggleActive(cover.id, cover.isActive)} /></td>
                                 </tr>
                             ))
                         )}
