@@ -118,7 +118,10 @@ const CsvByModel = () => {
 
                 <Row className="mt-3">
                     <Col className="d-flex gap-2">
-                        <Form.Control as="select" name="selectedManufacture" onChange={handleChange}>
+                        <Form.Control as="select" 
+                        name="selectedManufacture" 
+                        value={elementModel.selectedManufacture}
+                        onChange={handleChange}>
                             <option>Select Manufacturer</option>
                             {
                                 manufacturer.map((man) =>

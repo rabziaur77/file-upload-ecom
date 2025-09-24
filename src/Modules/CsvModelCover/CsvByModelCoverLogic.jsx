@@ -19,6 +19,29 @@ const manufacturer=[
     "M A ENTERPRISES",
     "MAX SHOPY DELHI"
 ]
+
+const modelBrandList=[
+  {
+    Brand: "MYSHANZ",
+    CompanyName: "MYSHA ENTERPRISES",
+    Address: "D265 AFE N.Delhi",
+    PinCode: "110025"
+  },
+  {
+    Brand: "MAXSHOPY",
+    CompanyName: "M A ENTERPRISES",
+    Address: "D266 AFE N.Delhi",
+    PinCode: "110025"
+  },
+  {
+    Brand: "MAXSHAD",
+    CompanyName: "MAX SHOPY DELHI",
+    Address: "D266 AFE N.Delhi",
+    PinCode: "110025"
+  }
+]
+
+
 function CsvByModelCoverLogic(){
     const navigate = useNavigate();
     const[models, setModels]=useState([]);
@@ -88,8 +111,18 @@ function CsvByModelCoverLogic(){
         setElementModel((prev)=>({...prev, [name]:value}))
 
 
-        if(name === "selectedManufacture")
-            setElementModel((prev)=>({...prev, company:value}))
+        if(name === "selectBrand"){
+            const modelInfo = modelBrandList.find(m => m.Brand.toLowerCase() === value.toLowerCase());
+            if(modelInfo){
+                setElementModel((prev)=>({...prev, 
+                    company:modelInfo.CompanyName, 
+                    address:modelInfo.Address, 
+                    pincode:modelInfo.PinCode,
+                    selectedManufacture: modelInfo.CompanyName
+                }));
+            }
+        }
+        console.log(elementModel)
     }
 
     const handleSelectAll = () => {
