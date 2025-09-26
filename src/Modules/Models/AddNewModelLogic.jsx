@@ -60,13 +60,20 @@ function MobileModelLogic(initialData = null) {
         dispatch(showPopup("Please, Wait..."))
 
         const requestData = bindData();
-        APIService.PostFormService("/api/MobileModels/AddModel", requestData)
+        var URL = "";
+        if (initialData === null) {
+            URL = "/api/MobileModels/AddModel";
+        }
+        else{
+            URL = "/api/MobileModels/UpdateModel";
+        }
+        APIService.PostFormService(URL, requestData)
             .then((rep) => {
                 let message = rep.message != undefined?rep.message: rep;
                 dispatch(showPopup(message))
                 setTimeout(() => {
                     dispatch(hidePopup())
-                }, 1000)
+                }, 1500)
             }).catch(ex => {
                 dispatch(showPopup("Something went wrong, please contact to support."))
                 setTimeout(() => {

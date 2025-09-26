@@ -144,8 +144,16 @@ function CoverContentLogic(initialData = null) {
         formDataToSend.append("Id", initialData.id);
       }
       // Call API to submit form data
+      var URL = "";
+      if (initialData === null) {
+            URL = "/api/MobileCovers/AddCover";
+        }
+        else{
+            URL = "/api/MobileCovers/UpdateCover";
+        }
+
       const response = await APIService.PostFormService(
-        "/api/MobileCovers/AddCover",
+        URL,
         formDataToSend
       );
 
@@ -154,7 +162,7 @@ function CoverContentLogic(initialData = null) {
       dispatch(showPopup(message));
       setTimeout(() => {
         dispatch(hidePopup());
-      }, 1000);
+      }, 1500);
     } catch (error) {
       console.error("Submission failed:", error);
       dispatch(showPopup("Something went wrong, please contact to support."));

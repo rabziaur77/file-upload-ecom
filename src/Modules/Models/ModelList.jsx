@@ -30,7 +30,7 @@ const ModelList = () => {
                     <tbody>
                         {models?.length === 0 ? (
                             <tr>
-                                <td colSpan="13" className="text-center">
+                                <td colSpan="14" className="text-center">
                                     No models saved yet
                                 </td>
                             </tr>

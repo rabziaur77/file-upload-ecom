@@ -94,7 +94,7 @@ function FlipKartXl({ mergedData }) {
                             <td>{item.aa || "N/A"}</td>
                             <td>{item.ab || "N/A"}</td>
                             <td>{item.ac || "N/A"}</td>
-                            <td>{item.ad || "N/A"}  ({item.softwareVersion || "N/A"})</td>
+                            <td>{item.ad || ""}  ({item.softwareVersion || ""})</td>
                             <td>{item.ae || "N/A"}</td>
                             <td>{item.af || "N/A"}</td>
                             <td>{item.ag || "N/A"}</td>

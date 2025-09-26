@@ -25,7 +25,7 @@ const APIService = {
         const AuthStr = Session !== null && Session !== undefined ? 'Bearer '.concat(Session) : "";
         const response = await axios.post(BASE_URL + endpoint, data, { headers: { 'Authorization': AuthStr, 'Content-Type': 'multipart/form-data' } }).catch(err => err);
         if (response.status != 200) {
-            return response.message
+            return response.response.data.message;
         }
         return response.data;
     },

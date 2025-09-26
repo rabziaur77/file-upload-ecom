@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import APIService from "../Service/API_Service";
+import { showConfirm, hideConfirm } from "../../redux/confirmSlice";
+import { useDispatch } from "react-redux";
 
 function CoverListLogic(){
     const[selecteCover, setSelecteCover]= useState(null);
     const[showCover, setShowCover]= useState(false);
     const[covers, setCover]=useState([]);
-    
+    const dispatch = useDispatch();
+
     useEffect(()=>{
         fetchCovers()
     },[])
@@ -39,14 +42,37 @@ function CoverListLogic(){
 
     const handleDel=async (id)=>{
         console.log(id)
-        const response = await APIService.deleteModel(`/api/MobileCovers/deleteCover/${id}`)
+        dispatch(showConfirm({
+        message: "Do you really want to delete this item?",
+        onConfirm: async (password) => {
+            const loginModel = JSON.parse(localStorage.getItem("session"));
+            let model = {
+                username: loginModel.username,
+                password: password
+            };
+            console.log("Deleting:", model,id);
 
-        if (response) {
-            alert(response.message);
-            fetchCovers();
-        } else {
-            console.warn("Unexpected response structure:", response);
-        }
+           await APIService.PostService('/api/UserAccount/loginUser', model)
+            .then(async response => {
+                if (response.message === "Login successful") {
+                     const response = await APIService.deleteModel(`/api/MobileCovers/deleteCover/${id}`)
+
+                    if (response) {
+                        alert(response.message);
+                        dispatch(hideConfirm());
+                        fetchModels();
+                    } else {
+                        console.warn("Unexpected response structure:", response);
+                    }
+                }
+                else {
+                    alert(response.status);
+                }
+            }).catch(ex => {
+                console.log(ex)
+            })
+        },
+        }));
     }
 
     const handleToggleActive= async(id, isActive)=>{

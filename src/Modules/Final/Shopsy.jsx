@@ -100,7 +100,7 @@ function ShopsyXl({ mergedData }) {
                             <td>{item.ai || "N/A"}</td>
                             <td>{item.af || "N/A"}</td>
                             <td>{item.x23 || "N/A"}</td>
-                            <td>{item.ad || "N/A"}  ({item.softwareVersion || "N/A"})</td>
+                            <td>{item.ad || ""}  ({item.softwareVersion || ""})</td>
                             <td>{item.ae || "N/A"}</td>
                             <td>{item.aa || "N/A"}</td>
                             <td>{item.ah || "N/A"}</td>

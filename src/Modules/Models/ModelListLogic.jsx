@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { showConfirm, hideConfirm } from "../../redux/confirmSlice";
 import APIService from "../Service/API_Service";
 
 function ModelListLogic(){
     const[selecteModel, setSelecteModel]= useState(null);
     const[showModal, setShowModal]= useState(false);
     const[models, setModels]=useState([]);
+    const dispatch = useDispatch();
     
     useEffect(()=>{
         fetchModels()
@@ -39,14 +42,37 @@ function ModelListLogic(){
 
     const handleDel=async (id)=>{
         console.log(id)
-        const response = await APIService.deleteModel(`/api/MobileModels/deleteModel/${id}`)
+        dispatch(showConfirm({
+        message: "Do you really want to delete this item?",
+        onConfirm: async (password) => {
+            const loginModel = JSON.parse(localStorage.getItem("session"));
+            let model = {
+                username: loginModel.username,
+                password: password
+            };
+            console.log("Deleting:", model,id);
 
-        if (response) {
-            alert(response.message);
-            fetchModels();
-        } else {
-            console.warn("Unexpected response structure:", response);
-        }
+           await APIService.PostService('/api/UserAccount/loginUser', model)
+            .then(async response => {
+                if (response.message === "Login successful") {
+                     const response = await APIService.deleteModel(`/api/MobileModels/deleteModel/${id}`)
+
+                    if (response) {
+                        alert(response.message);
+                        dispatch(hideConfirm());
+                        fetchModels();
+                    } else {
+                        console.warn("Unexpected response structure:", response);
+                    }
+                }
+                else {
+                    alert(response.status);
+                }
+            }).catch(ex => {
+                console.log(ex)
+            })
+        },
+        }));
     }
     const handleToggleActive= async(id, isActive)=>{
         const response = await APIService.PatchService(`/api/MobileModels/updateIsActive/${id}`,{ isActive: !isActive })

@@ -76,3 +76,27 @@
     color: #fff;
     border-radius: 3px;
 }
+.confirm-closeOpt{
+    direction: rtl;
+    border: none;
+}
+.confirm-closeOpt button{
+        border-top-right-radius: 5px;
+        border: none;
+        background-color: red;
+        color: white;
+}
+.confirm-Body{
+    position: relative;
+    left: 38%;
+    top: 30%;
+    background-color: white;
+    width: 22%;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+.confirm-message{
+    padding: 10px;
+    font-size: large;
+    text-align: center;
+}
