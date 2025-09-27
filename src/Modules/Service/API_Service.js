@@ -1,7 +1,7 @@
 import axios from "axios";
 
-//export const BASE_URL = "http://localhost:5048"
-export const BASE_URL="http://89.116.21.168:5000"
+export const BASE_URL = "http://localhost:5048"
+//export const BASE_URL="http://89.116.21.168:5000"
 
 const APIService = {
     GetService: async (endpoint) => {
