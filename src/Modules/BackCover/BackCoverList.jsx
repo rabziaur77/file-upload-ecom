@@ -1,16 +1,15 @@
-import React from "react";
 import { Table, Container, Modal } from "react-bootstrap";
-import CoverListLogic from "./CoverListLogic";
-import CoverContent from "./AddNewCovert";
+import BackCoverListLogic from "./BackCoverListLogic";
 import '../Models/modelStyle.css'
+import BackCoverContent from "./BackAddNewCovert";
 
-const CoverList = () => {
+const BackCoverList = () => {
 
-    const{covers,handleClose,handleDel,handleEdit,selecteCover,showCover,handleToggleActive} = CoverListLogic()
+    const{covers,handleClose,handleDel,handleEdit,selecteCover,showCover,handleToggleActive} = BackCoverListLogic()
 
     return (
         <div>
-            <h1 className="h2 border-bottom pb-2">Cover List</h1>
+            <h1 className="h2 border-bottom pb-2">Back Cover List</h1>
 
             <Container className="mt-3">
                 <Table striped hover>
@@ -79,7 +78,7 @@ const CoverList = () => {
                     <Modal.Title>Edit Cover</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <CoverContent initialData={selecteCover}/>
+                    <BackCoverContent initialData={selecteCover}/>
                 </Modal.Body>
             </Modal>
 
@@ -87,4 +86,4 @@ const CoverList = () => {
     );
 };
 
-export default CoverList;
+export default BackCoverList;

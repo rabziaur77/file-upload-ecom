@@ -10,6 +10,10 @@ import Anonymous from "./Modules/CommonModules/anonymous_layout";
 import AccountLogin from "./Modules/Accont/Login/account-login";
 import CsvByModel from "./Modules/CsvModelCover/CsvByModelCover";
 import FinalConfig from "./Modules/Final/ConfigModelndCover";
+import BackModelList from "./Modules/BackModel/BackModelList";
+import AddNewBackModel from "./Modules/BackModel/AddNewBackModel";
+import BackCoverContent from "./Modules/BackCover/BackAddNewCovert";
+import BackCoverList from "./Modules/BackCover/BackCoverList";
 
 const App = () => {
   return (
@@ -32,6 +36,10 @@ const App = () => {
               <Route path="/cover-list" element={<CoverList />} />
               <Route path="/csv-by-model" element={<CsvByModel />} />
               <Route path="/final-config" element={<FinalConfig/>} />
+              <Route path="/back-model" element={<AddNewBackModel />} />
+              <Route path="/back-model-list" element={<BackModelList />} />
+              <Route path="/back-cover" element={<BackCoverContent />} />
+              <Route path="/back-cover-list" element={<BackCoverList />} />
             </Routes>
           </Layout>
         </BrowserRouter>

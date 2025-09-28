@@ -1,21 +1,16 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
-import "./CommonCss/CommonCssStyle.css";
 import AdminNavbar from "./AdminNavbar";
 import Sidebar from "./Sidebar";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ConfirmPopup from "./confirmPopup";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./CommonCss/CommonCssStyle.css";
 
 const Layout = ({ children }) => {
-  const dispatch = useDispatch();
   const { isPopupShow, message } = useSelector((state) => state.popup);
   const { isConfirmShow, messages, onConfirm } = useSelector(
     (state) => state.confirm
   );
-  // const hideMessage=()=>{
-  //     dispatch(hidePopup())
-  // }
-  
 
   return (
     <div>
