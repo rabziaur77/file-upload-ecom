@@ -1,22 +1,27 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { showPopup, hidePopup } from "../../redux/popupslice";
 import APIService from "../Service/API_Service";
 
 function AddNewBackModelLogic(initialData = null) {
     const dispatch = useDispatch();
+    const[boxList,setBoxList]=useState([]);
+    const[coverList,setCoverList]=useState([]);
     const [formData, setFormData] = useState({
-        modelName: "",
-        skuModelName: "",
         boxNo: "",
-        softwareVersion: "",
         selectStyle: "Plain",
         selectSize: "Small",
         companyName: "",
         address: "",
         pincode: "",
+        coverName: "",
         watermarks: [],
     });
+
+    useEffect(() => {
+        fetchModels();
+        fetchCovers();
+    }, []);
 
     useEffect(() => {
         if (initialData) {
@@ -41,6 +46,33 @@ function AddNewBackModelLogic(initialData = null) {
             });
         }
     }, [initialData]);
+
+
+    const fetchModels = async ()=>{
+        try {
+            const response = await APIService.GetService("/api/MobileModels/GetModelList");
+            if (response && response.response) {
+                setBoxList(response.response);
+            } else {
+                console.warn("Unexpected response structure:", response);
+            }
+        } catch (error) {
+            console.error("Failed to fetch models:", error);
+        }
+    }
+
+    const fetchCovers = async ()=>{
+        try {
+            const response = await APIService.GetService("/api/MobileCovers/GetCoverList");
+            if (response && response.response) {
+                setCoverList(response.response);
+            } else {
+                console.warn("Unexpected response structure:", response);
+            }
+        } catch (error) {
+            console.error("Failed to fetch models:", error);
+        }
+    }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -85,21 +117,20 @@ function AddNewBackModelLogic(initialData = null) {
 
     const bindData = () => {
         const requestData = new FormData();
-
-        requestData.append('ModelName', formData.modelName);
-        requestData.append('SkuModelName', formData.skuModelName);
+        
+        //requestData.append('PlainOrCurve', formData.selectStyle);
+        //requestData.append('Size', formData.selectSize);
+        requestData.append('CoverName', formData.coverName);
         requestData.append('BoxNumber', formData.boxNo);
-        requestData.append('SoftwareVersion', formData.softwareVersion);
-        requestData.append('PlainOrCurve', formData.selectStyle);
-        requestData.append('Size', formData.selectSize);
         requestData.append('CompanyName', formData.companyName);
         requestData.append('Address', formData.address);
         requestData.append('Pincode', formData.pincode);
+        requestData.append('Watermark4', boxList.find(b=>b.boxNumber===formData.boxNo)?.watermark4 || "");
 
         // Append MobileModelRequest properties
         if (initialData === null) {
             // Get files using IDs
-            for (let i = 1; i <= 6; i++) {
+            for (let i = 1; i <= 3; i++) {
                 const fileInput = document.getElementById(`Watermark${i}`);
                 if (fileInput?.files?.[0]) {
                     requestData.append('watermarks', fileInput.files[0]);
@@ -126,6 +157,8 @@ function AddNewBackModelLogic(initialData = null) {
         handleSubmit,
         handleFileChange,
         handleChange,
+        boxList,
+        coverList
     };
 }
 

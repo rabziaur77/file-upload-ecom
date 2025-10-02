@@ -19,6 +19,7 @@ const BackModelList = () => {
                             <th>Model</th>
                             <th>SKU</th>
                             <th>Box</th>
+                            <th>Cover Name</th>
                             <th>Size</th>
                             <th>w1</th><th>w2</th><th>w3</th><th>w4</th><th>w5</th><th>w6</th>
                             <th>Edit</th>
@@ -40,6 +41,7 @@ const BackModelList = () => {
                                     <td>{model.modelName}</td>
                                     <td>{model.skuModelName}</td>
                                     <td>{model.boxNumber}</td>
+                                    <td>{model.coverName}</td>
                                     <td>{model.size}</td>
                                     <td>{model.watermark1 != null ? <img className="img-size" src={model.watermark1} /> : null}</td>
                                     <td>{model.watermark2 != null ? <img className="img-size" src={model.watermark2} /> : null}</td>

@@ -3,7 +3,7 @@ import AddNewBackModelLogic from "./AddNewBackModelLogic";
 
 const AddNewBackModel = ({ initialData }) => {
 
-    const { formData, handleChange, handleFileChange, handleSubmit } = AddNewBackModelLogic(initialData)
+    const { formData, handleChange, handleFileChange, handleSubmit, boxList, coverList } = AddNewBackModelLogic(initialData)
 
     return (
         <div>
@@ -13,69 +13,60 @@ const AddNewBackModel = ({ initialData }) => {
                     <Row>
                         <Col md={6}>
                             <Form.Group>
-                                <Form.Label>Model Name</Form.Label>
+                                <Form.Label>Box no</Form.Label>
                                 <Form.Control
-                                    type="text"
-                                    name="modelName"
-                                    placeholder="Enter model name"
-                                    value={formData.modelName}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>SKU Model Name</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    name="skuModelName"
-                                    placeholder="Enter SKU model name"
-                                    value={formData.skuModelName}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>Box No.</Form.Label>
-                                <Form.Control
-                                    type="text"
+                                    as="select"
                                     name="boxNo"
-                                    placeholder="Enter box number"
                                     value={formData.boxNo}
                                     onChange={handleChange}
                                     required
-                                />
+                                >
+                                    <option>Select Box number</option>
+                                    {boxList.map((box, index) => (
+                                        <option key={index} value={box.boxNumber}>
+                                            {box.boxNumber}
+                                        </option>
+                                    ))}
+                                </Form.Control>
                             </Form.Group>
                             <Form.Group>
-                                <Form.Label>Software Version</Form.Label>
+                                <Form.Label>Cover Name</Form.Label>
                                 <Form.Control
-                                    type="text"
-                                    name="softwareVersion"
-                                    placeholder="Enter software version"
-                                    value={formData.softwareVersion}
+                                    as="select"
+                                    name="coverName"
+                                    value={formData.coverName}
                                     onChange={handleChange}
-                                />
+                                    required
+                                >
+                                    <option>Select Cover Name</option>
+                                    {coverList.map((cover, index) => (
+                                        <option key={index} value={cover.coverName+' '+'9'}>
+                                            {cover.coverName+' '+'9'}
+                                        </option>
+                                    ))}
+                                </Form.Control>
                             </Form.Group>
-                            <Form.Group>
+                            <Form.Group style={{display:"none"}}>
                                 <Form.Label>Plain</Form.Label>
                                 <Form.Control
                                     as="select"
                                     name="selectStyle"
                                     value={formData.selectStyle}
                                     onChange={handleChange}
-                                    required
+                                    //required
                                 >
                                     <option>Plain</option>
                                     <option>Curve</option>
                                 </Form.Control>
                             </Form.Group>
-                            <Form.Group>
+                            <Form.Group style={{display:"none"}}>
                                 <Form.Label>Select Size</Form.Label>
                                 <Form.Control
                                     as="select"
                                     name="selectSize"
                                     value={formData.selectSize}
                                     onChange={handleChange}
-                                    required
+                                    //required
                                 >
                                     <option value="">Select Size</option>
                                     <option value="M">M</option>
@@ -119,12 +110,23 @@ const AddNewBackModel = ({ initialData }) => {
                             </Form.Group>
                         </Col>
                         <Col md={6}>
-                            {[...Array(6)].map((_, index) => (
+                            {[...Array(3)].map((_, index) => (
                                 <Form.Group key={index}>
                                     <Form.Label>Watermark {index + 1}</Form.Label>
                                     <Form.Control
                                         type="file"
                                         id={`Watermark${index + 1}`}
+                                        onChange={(e) => handleFileChange(e, index)}
+                                    />
+                                </Form.Group>
+                            ))}
+                            {[...Array(3)].map((_, index) => (
+                                <Form.Group key={index}>
+                                    <Form.Label>Watermark {index + 4}</Form.Label>
+                                    <Form.Control
+                                        type="file"
+                                        disabled={true}
+                                        id={`Watermark${index + 4}`}
                                         onChange={(e) => handleFileChange(e, index)}
                                     />
                                 </Form.Group>
