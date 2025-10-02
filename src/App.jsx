@@ -14,6 +14,8 @@ import BackModelList from "./Modules/BackModel/BackModelList";
 import AddNewBackModel from "./Modules/BackModel/AddNewBackModel";
 import BackCoverContent from "./Modules/BackCover/BackAddNewCovert";
 import BackCoverList from "./Modules/BackCover/BackCoverList";
+import CsvByModelBackCover from "./Modules/CsvModelBackCover/CsvByModelBackCover";
+import BackFinalConfig from "./Modules/FinalBack/BackConfigModelndCover";
 
 const App = () => {
   return (
@@ -35,7 +37,9 @@ const App = () => {
               <Route path="/add-cover" element={<CoverContent />} />
               <Route path="/cover-list" element={<CoverList />} />
               <Route path="/csv-by-model" element={<CsvByModel />} />
+              <Route path="/csv-by-model-back" element={<CsvByModelBackCover />} />
               <Route path="/final-config" element={<FinalConfig/>} />
+              <Route path="/back-final-config" element={<BackFinalConfig />} />
               <Route path="/back-model" element={<AddNewBackModel />} />
               <Route path="/back-model-list" element={<BackModelList />} />
               <Route path="/back-cover" element={<BackCoverContent />} />

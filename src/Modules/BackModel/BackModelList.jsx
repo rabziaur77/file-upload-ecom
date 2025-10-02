@@ -30,7 +30,7 @@ const BackModelList = () => {
                     <tbody>
                         {models?.length === 0 ? (
                             <tr>
-                                <td colSpan="14" className="text-center">
+                                <td colSpan="15" className="text-center">
                                     No models saved yet
                                 </td>
                             </tr>

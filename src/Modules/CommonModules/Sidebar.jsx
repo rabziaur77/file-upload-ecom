@@ -55,6 +55,7 @@ const Sidebar = () => {
                 <Link className='nav-link' to={"/back-cover-list"}>Back Covers</Link>
             </div>
           </Collapse>
+          <Link className='nav-link' to={"/csv-by-model-back"}>Csv By Back Model</Link>
         </Nav>
       </div>
     );
