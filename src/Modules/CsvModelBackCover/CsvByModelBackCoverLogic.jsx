@@ -46,6 +46,7 @@ function CsvByModelBackCoverLogic(){
     const navigate = useNavigate();
     const[models, setModels]=useState([]);
     const[covers, setCover]=useState([]);
+    const[masterCovers, setMasterCover]=useState([]);
     const [selectedCovers, setSelectedCovers] = useState(new Set());
     const [selectAll, setSelectAll] = useState(false);
     const[elementModel, setElementModel] = useState(
@@ -82,8 +83,8 @@ function CsvByModelBackCoverLogic(){
             
             // Check the structure of the response
             if (response && response.response) {
-                //const coverMap = response.response.filter(cover => cover.isActive);
-                //setCover(coverMap);
+                const coverMap = response.response.filter(cover => cover.isActive);
+                setMasterCover(coverMap);
             } else {
                 console.warn("Unexpected response structure:", response);
             }
@@ -117,7 +118,7 @@ function CsvByModelBackCoverLogic(){
 
         if(name === "selectedModel"){
             const getCover = models.find(m => m.isActive === true && m.boxNumber === value)?.coverName;
-            const getCovers = covers.filter(c => c.isActive === true && c.coverName === getCover);
+            const getCovers = masterCovers.filter(c => c.isActive === true && c.coverName === getCover);
             setCover(getCovers);
         }
     }
