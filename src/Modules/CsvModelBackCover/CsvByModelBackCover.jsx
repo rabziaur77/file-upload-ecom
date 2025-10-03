@@ -8,12 +8,14 @@ import {
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CsvByModelBackCoverLogic from "./CsvByModelBackCoverLogic";
+import ModelMultiSelect from '../CommonModules/ModelMultiSelect';
 
 const CsvByModelBackCover = () => {
     const { models, covers, brandCoverFlip,
         handleCoverChange, handleSelectAll,
         selectAll, selectedCovers, brand,
-        handleChange, elementModel, manufacturer, clickForEcom, btnList
+        handleChange, elementModel, manufacturer, clickForEcom, btnList,
+        selectedModels, handleChangeMultiSelect
     } = CsvByModelBackCoverLogic();
 
     return (
@@ -24,15 +26,13 @@ const CsvByModelBackCover = () => {
                 <Row className="mb-3">
                     <Col>
                         <Form.Group controlId="selectModel">
-                            <Form.Label>Select Model <span className="text-danger">*</span></Form.Label>
-                            <Form.Control as="select" name="selectedModel" onChange={handleChange} required>
-                                <option>Select Model</option>
-                                {
-                                    models.map((model, index) =>
-                                        <option key={index} value={model.boxNumber}>{model.modelName} - {model.boxNumber}</option>
-                                    )
-                                }
-                            </Form.Control>
+                            <ModelMultiSelect
+                                label="Select Models"
+                                placeholder="Search or select models..."
+                                models={models}
+                                value={selectedModels}
+                                onChange={handleChangeMultiSelect}
+                            />
                         </Form.Group>
                     </Col>
                 </Row>

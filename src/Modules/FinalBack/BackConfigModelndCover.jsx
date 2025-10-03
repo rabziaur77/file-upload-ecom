@@ -56,8 +56,8 @@ const BackFinalConfig = () => {
         const textarea = document.createElement('textarea');
         textarea.value = tsvData;
         document.body.appendChild(textarea);
-        textarea.style.position = 'fixed';  // Prevent scroll jump
-        textarea.style.opacity = '0';       // Hide from view
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
         textarea.select();
     
         try {
