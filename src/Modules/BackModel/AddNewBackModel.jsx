@@ -51,8 +51,8 @@ const AddNewBackModel = ({ initialData }) => {
                 >
                   <option>Select Cover Name</option>
                   {coverList.map((cover, index) => (
-                    <option key={index} value={cover.coverName + " " + "9"}>
-                      {cover.coverName + " " + "9"}
+                    <option key={index} value={cover.coverName}>
+                      {cover.coverName}
                     </option>
                   ))}
                 </Form.Control>
