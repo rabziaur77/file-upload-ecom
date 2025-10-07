@@ -65,7 +65,7 @@ function AddNewBackModelLogic(initialData = null) {
   const fetchCovers = async () => {
     try {
       const response = await APIService.GetService(
-        "/api/MobileCovers/GetCoverList"
+        "/api/MobileBackCovers/GetCoverList"
       );
       if (response && response.response) {
         setCoverList(response.response);
@@ -80,6 +80,14 @@ function AddNewBackModelLogic(initialData = null) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+
+    if (name === "boxNo") {
+      const selectedBox = boxList.find((box) => box.boxNumber === value);
+      console.log("Selected Box:", selectedBox.modelName);
+      for (let i = 1; i <= 3; i++) {
+        document.getElementById(`WatermarkText${i}`).value = "For " + (selectedBox.modelName || `WATERMARK ${i}`);
+      }
+    }
   };
 
   const handleFileChange = (e, index) => {
