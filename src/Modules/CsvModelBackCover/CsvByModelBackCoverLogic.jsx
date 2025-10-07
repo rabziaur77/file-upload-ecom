@@ -35,6 +35,7 @@ const modelBrandList = [
 function CsvByModelBackCoverLogic() {
   const navigate = useNavigate();
   const [selectedModels, setSelectedModels] = useState([]);
+  const [masterModels, setMasterModels] = useState([]);
   const [models, setModels] = useState([]);
   const [covers, setCover] = useState([]);
   const [masterCovers, setMasterCover] = useState([]);
@@ -64,7 +65,14 @@ function CsvByModelBackCoverLogic() {
       // Check the structure of the response
       if (response && response.response) {
         const modelMap = response.response.filter((model) => model.isActive);
-        setModels(modelMap);
+        setMasterModels(modelMap);
+
+        const uniqueModels = modelMap.filter(
+        (model, index, self) =>
+            index === self.findIndex((m) => m.boxNumber === model.boxNumber)
+        );
+
+        setModels(uniqueModels);
       } else {
         console.warn("Unexpected response structure:", response);
       }
@@ -198,15 +206,27 @@ function CsvByModelBackCoverLogic() {
   const handleChangeMultiSelect = (newValue = []) => {
     setSelectedModels(newValue);
 
-    const updatedCovers = newValue.flatMap((value) => {
-      const getCover = models.find(
-        (m) => m.isActive === true && m.boxNumber === value
-      )?.coverName;
-      return masterCovers.filter(
-        (c) => c.isActive === true && c.coverName === getCover
-      );
-    });
-    setCover(updatedCovers);
+    const matchedModels = masterModels.filter(
+    (model) =>
+      model.isActive && newValue.includes(model.boxNumber)
+  );
+
+  const matchedCovers = matchedModels.flatMap((model) =>
+    masterCovers.filter(
+      (cover) => cover.isActive && cover.coverName === model.coverName
+    )
+  );
+  setCover(matchedCovers);
+
+    // const updatedCovers = newValue.flatMap((value) => {
+    //   const getCover = models.find(
+    //     (m) => m.isActive === true && m.boxNumber === value
+    //   )?.coverName;
+    //   return masterCovers.filter(
+    //     (c) => c.isActive === true && c.coverName === getCover
+    //   );
+    // });
+    //setCover(updatedCovers);
   };
 
   return {
