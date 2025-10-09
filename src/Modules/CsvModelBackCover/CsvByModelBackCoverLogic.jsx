@@ -68,7 +68,7 @@ function CsvByModelBackCoverLogic() {
         setMasterModels(modelMap);
 
         const uniqueModels = modelMap.filter(
-        (model, index, self) =>
+          (model, index, self) =>
             index === self.findIndex((m) => m.boxNumber === model.boxNumber)
         );
 
@@ -189,7 +189,11 @@ function CsvByModelBackCoverLogic() {
 
     const masterModel = {
       selectedEcom: callEcom,
-      selectedModel: models.filter((model) => selectedModels.includes(model.boxNumber)),
+      selectedModel: masterModels.filter((model) =>
+        selectedModels.some((selected) => {
+          return model.boxNumber === selected;
+        })
+      ),
       selectedBrand: elementModel.selectBrand,
       selectedManufacturer: elementModel.selectedManufacture,
       selectedCovers: covers.filter((cover) =>
@@ -205,28 +209,24 @@ function CsvByModelBackCoverLogic() {
 
   const handleChangeMultiSelect = (newValue = []) => {
     setSelectedModels(newValue);
-
     const matchedModels = masterModels.filter(
-    (model) =>
-      model.isActive && newValue.includes(model.boxNumber)
-  );
+      (model) => model.isActive && newValue.includes(model.boxNumber)
+    );
 
-  const matchedCovers = matchedModels.flatMap((model) =>
-    masterCovers.filter(
-      (cover) => cover.isActive && cover.coverName === model.coverName
-    )
-  );
-  setCover(matchedCovers);
+    const matchedCovers = matchedModels.flatMap((model) =>
+      masterCovers.filter(
+        (cover) => cover.isActive && cover.coverName === model.coverName
+      )
+    );
 
-    // const updatedCovers = newValue.flatMap((value) => {
-    //   const getCover = models.find(
-    //     (m) => m.isActive === true && m.boxNumber === value
-    //   )?.coverName;
-    //   return masterCovers.filter(
-    //     (c) => c.isActive === true && c.coverName === getCover
-    //   );
-    // });
-    //setCover(updatedCovers);
+    const uniqueCovers = matchedCovers.filter(
+      (cover, index, self) =>
+        index === self.findIndex(c => c.coverName === cover.coverName)
+    );
+
+    setCover(uniqueCovers);
+
+    //setCover(matchedCovers);
   };
 
   return {
