@@ -84,6 +84,7 @@ function AddNewBackModelLogic(initialData = null) {
     if (name === "boxNo") {
       const selectedBox = boxList.find((box) => box.boxNumber === value);
       console.log("Selected Box:", selectedBox.modelName);
+      setFormData((prev)=>({...prev, companyName: selectedBox?.companyName || "", address: selectedBox?.address || "", pincode: selectedBox?.pincode || ""}));
       for (let i = 1; i <= 3; i++) {
         document.getElementById(`WatermarkText${i}`).value = "For " + (selectedBox.modelName || `WATERMARK ${i}`);
       }
