@@ -195,7 +195,7 @@ function AddNewBackModelLogic(initialData = null) {
             (blob) => {
               resolve(blob);
             },
-            "image/jpeg",
+            "image/png",
             0.95
           );
         };
